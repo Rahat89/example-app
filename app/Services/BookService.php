@@ -33,7 +33,16 @@ class BookService extends BaseService implements BookInterface {
 
     public function all()
     {
-        return Book::all();
+        return collect([
+            [
+                'id' => 1,
+                'title' => 'First Book'
+            ],
+            [
+                'id' => 2,
+                'title' => 'Second Book'
+            ],
+        ]);
     }
 
     public function review($id, $review)

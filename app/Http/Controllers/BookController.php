@@ -21,4 +21,9 @@ class BookController extends Controller
     {
         return $this->bookService->read($id);
     }
+
+    public function all()
+    {
+        return $this->bookService->all();
+    }
 }

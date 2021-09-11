@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/login', function (){
-    session()->put('EP_LOGIN', \Illuminate\Support\Str::random(10));
+    session()->put('EP_LOGIN', Str::random(10));
     dump('You are logged in now');
 });
 
@@ -31,3 +32,4 @@ Route::get('/read-post/{id}', [PostController::class, 'readPost']);
 
 
 Route::get('/posts', [PostController::class, 'all']);
+Route::get('/books', [BookController::class, 'all']);

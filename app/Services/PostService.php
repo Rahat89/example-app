@@ -6,11 +6,15 @@ use App\Contracts\PostInterface;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
-class PostService implements PostInterface {
+class PostService extends BaseService implements PostInterface {
 
     public function create(Request $request)
     {
-        return Post::create($request->all());
+        $data = $request->all();
+        if($request->get('cover_photo')){
+            $data['cover_photo'] = $this->uploadImage($request->get('cover_photo'));
+        }
+        return Post::create($data);
     }
 
     public function update(Post $post, Request $request)
@@ -20,7 +24,16 @@ class PostService implements PostInterface {
 
     public function all()
     {
-        return Post::all();
+        return collect([
+            [
+                'id' => 1,
+                'title' => 'First post'
+            ],
+            [
+                'id' => 2,
+                'title' => 'Second post'
+            ],
+        ]);
     }
 
     public function comment($id, $user, $comment)
